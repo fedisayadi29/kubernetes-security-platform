@@ -1,0 +1,72 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: demo-app
+  labels:
+    app: nginx-demo
+    owner: fedi-sayadi
+    environment: dev
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-demo
+  template:
+    metadata:
+      labels:
+        app: nginx-demo
+        owner: fedi-sayadi
+        environment: dev
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 101
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          envFrom:
+            - secretRef:
+                name: demo-secret
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "64Mi"
+            limits:
+              cpu: "250m"
+              memory: "128Mi"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - name: html-volume
+              mountPath: /usr/share/nginx/html
+            - name: cache-volume
+              mountPath: /var/cache/nginx
+            - name: run-volume
+              mountPath: /var/run
+      volumes:
+        - name: html-volume
+          configMap:
+            name: nginx-config
+        - name: cache-volume
+          emptyDir: {}
+        - name: run-volume
+          emptyDir: {}

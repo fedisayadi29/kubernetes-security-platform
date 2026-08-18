@@ -1,0 +1,14 @@
+﻿apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: demo-app
+data:
+  index.html: |
+    <html>
+      <head><title>Demo App</title></head>
+      <body>
+        <h1>Bienvenue sur la plateforme de securite Kubernetes</h1>
+        <p>Deploye via ConfigMap - Phase 2</p>
+      </body>
+    </html>
