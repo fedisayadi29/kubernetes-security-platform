@@ -1,0 +1,30 @@
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Kubernetes local state and generated credentials
+*.kubeconfig
+kubeconfig
+*.key
+*.crt
+*.pem
+
+# Local logs and temporary reports
+*.log
+*.tmp
+.DS_Store
+
+# Local tooling and editor files
+.vscode/
+.idea/
+
+# Minikube and container artifacts
+.minikube/
+*.tar
+*.tgz
+
+# Python and Node local artifacts if auxiliary scripts are added later
+__pycache__/
+*.py[cod]
+node_modules/
