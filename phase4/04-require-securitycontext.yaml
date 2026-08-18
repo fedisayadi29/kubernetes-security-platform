@@ -1,0 +1,19 @@
+﻿apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-security-context
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: check-securitycontext-present
+      match:
+        any:
+        - resources:
+            kinds: [Pod]
+      validate:
+        message: "Chaque conteneur doit definir un securityContext."
+        pattern:
+          spec:
+            containers:
+              - securityContext: {}

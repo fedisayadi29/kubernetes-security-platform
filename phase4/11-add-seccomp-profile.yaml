@@ -1,0 +1,17 @@
+﻿apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: add-seccomp-profile
+spec:
+  rules:
+    - name: add-default-seccomp
+      match:
+        any:
+        - resources:
+            kinds: [Pod]
+      mutate:
+        patchStrategicMerge:
+          spec:
+            securityContext:
+              +(seccompProfile):
+                type: RuntimeDefault

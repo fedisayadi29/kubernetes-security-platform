@@ -1,0 +1,16 @@
+﻿apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: add-default-annotations
+spec:
+  rules:
+    - name: add-annotations
+      match:
+        any:
+        - resources:
+            kinds: [Pod]
+      mutate:
+        patchStrategicMerge:
+          metadata:
+            annotations:
+              +(reviewed-by): proxym-it-security
