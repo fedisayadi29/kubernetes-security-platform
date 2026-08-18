@@ -2,9 +2,19 @@
 
 > Plateforme pédagogique de sécurisation d’un cluster Kubernetes local avec Minikube et des outils open source.
 
-Ce dépôt présente une démarche progressive de sécurisation d’un environnement Kubernetes local. Il regroupe les manifestes, les politiques, les scénarios de test, les rapports d’analyse et la documentation produits au cours du projet.
+Ce dépôt présente une démarche progressive de sécurisation d’un environnement Kubernetes local. Il contient une documentation synthétique à la racine ainsi qu’une archive source complète qui conserve l’arborescence originale des phases, manifestes, politiques et rapports.
 
 Le projet a été réalisé dans un contexte d’apprentissage. Il permet d’explorer les principes de validation des manifestes, de **Policy as Code**, de sécurité des conteneurs, d’audit de conformité et de segmentation réseau. Il ne constitue pas une configuration prête pour une infrastructure de production.
+
+## Contenu du dépôt
+
+| Élément | Description |
+|---|---|
+| `README.md` | Présentation, objectifs, installation et limites du projet |
+| `.gitignore` | Exclusions des fichiers locaux et secrets potentiels |
+| `kubernetes-security-platform-source.zip` | Archive complète contenant les dossiers `phase2` à `phase10` |
+
+L’archive source conserve notamment les manifestes Nginx, les rapports kubeconform/kube-linter, les 13 politiques Kyverno, les scénarios de test, les rapports Trivy, kube-bench et kube-hunter ainsi que les NetworkPolicies.
 
 ## Objectifs
 
@@ -26,25 +36,20 @@ La plateforme couvre les principaux objectifs suivants :
 Le projet suit dix phases. Les premières phases installent l’environnement et déploient l’application de démonstration. Les phases suivantes analysent les manifestes, introduisent Kyverno, testent les politiques, analysent les vulnérabilités et évaluent la configuration du cluster. Les dernières phases traitent la segmentation réseau, la détection des expositions et la documentation finale.
 
 ```text
-kubernetes-security-platform/
-├── phase2/                       # Déploiement de l’application Nginx
-├── phase3/                       # Rapports kubeconform et kube-linter
-├── phase4/                       # 13 politiques Kyverno
-├── phase5/                       # Manifestes conformes et non conformes
-├── phase6/                       # Rapports Trivy
-├── phase7/                       # Job et rapports kube-bench
-├── phase8/                       # NetworkPolicies et scénarios d’isolation
-├── phase9/                       # Rapport kube-hunter
-├── phase10/                      # Synthèse et copies des livrables principaux
-├── README.md
-└── .gitignore
+phase2/  Déploiement de l’application Nginx
+phase3/  Rapports kubeconform et kube-linter
+phase4/  13 politiques Kyverno
+phase5/  Manifestes conformes et non conformes
+phase6/  Rapports Trivy
+phase7/  Job et rapports kube-bench
+phase8/  NetworkPolicies et scénarios d’isolation
+phase9/  Rapport kube-hunter
+phase10/ Synthèse et copies des livrables principaux
 ```
 
 ## Prérequis
 
 Pour reproduire les expérimentations localement, installer Docker, kubectl et Minikube. Les outils d’analyse peuvent être installés localement ou exécutés dans des conteneurs selon leur documentation officielle.
-
-Les commandes suivantes permettent de vérifier les composants principaux :
 
 ```bash
 docker --version
@@ -63,7 +68,7 @@ kubectl get pods -A
 
 ## Déploiement de l’application de démonstration
 
-Les manifestes de la phase 2 sont appliqués de manière déclarative :
+Après extraction de `kubernetes-security-platform-source.zip`, appliquer les manifestes de la phase 2 de manière déclarative :
 
 ```bash
 kubectl apply -f phase2/namespace.yaml
@@ -114,7 +119,7 @@ Les messages retournés par Kyverno doivent être comparés aux rapports et cons
 
 ## Rapports disponibles
 
-Les résultats générés pendant les expérimentations sont conservés dans les dossiers correspondants. Le rapport Trivy est disponible en formats texte et JSON. Les rapports kube-bench comprennent une version détaillée et une version nettoyée. Les rapports kube-hunter et kube-score complètent l’évaluation de l’exposition et des bonnes pratiques.
+Les résultats générés pendant les expérimentations sont conservés dans l’archive source. Le rapport Trivy est disponible en formats texte et JSON. Les rapports kube-bench comprennent une version détaillée et une version nettoyée. Les rapports kube-hunter et kube-score complètent l’évaluation de l’exposition et des bonnes pratiques.
 
 Les résultats sont liés à un environnement local et à une date d’exécution donnée. Ils ne doivent pas être interprétés comme une certification permanente de la sécurité d’un cluster.
 
