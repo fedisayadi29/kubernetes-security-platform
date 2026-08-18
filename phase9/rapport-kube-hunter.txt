@@ -1,0 +1,10 @@
+﻿2026-07-22 10:54:21,225 INFO kube_hunter.modules.report.collector Found vulnerability "Exposed System Logs" in minikube:10250
+2026-07-22 10:54:21,597 INFO kube_hunter.modules.report.collector Found open service "Etcd" at 192.168.49.2:2379
+2026-07-22 10:54:22,012 INFO kube_hunter.modules.report.collector Found open service "Etcd" at minikube:2379
+2026-07-22 10:54:28,766 INFO kube_hunter.modules.report.collector Found open service "API Server" at 10.96.0.1:443
+2026-07-22 10:54:28,796 INFO kube_hunter.modules.report.collector Found vulnerability "K8s Version Disclosure" in 10.96.0.1:443
+2026-07-22 10:54:28,800 INFO kube_hunter.modules.report.collector Found vulnerability "Access to API using service account token" in 10.96.0.1:443
+2026-07-22 10:54:28,830 INFO kube_hunter.modules.report.collector Found vulnerability "Listing namespaces using default service account token" in 10.96.0.1:443
+2026-07-22 10:54:28,914 INFO kube_hunter.modules.report.collector Found vulnerability "Listing roles using default service account token" in 10.96.0.1:443
+2026-07-22 10:54:28,938 INFO kube_hunter.modules.report.collector Found vulnerability "Listing cluster roles using default service account token" in 10.96.0.1:443
+2026-07-22 10:54:28,959 INFO kube_hunter.modules.report.collector Found vulnerability "Listing pods using default service account token" in 10.96.0.1:443
